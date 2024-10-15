@@ -75,7 +75,7 @@ Here’s an overview of the key directories and files in the project:
 ├── docker-compose.yml        # Docker Compose configuration
 ```
 ### Key Files:
-docker-compose.yml: This file defines how Docker Compose should set up and link the frontend and backend containers.
+- docker-compose.yml: This file defines how Docker Compose should set up and link the frontend and backend containers.
 ```bash 
 version: '3'
 services:
@@ -123,6 +123,8 @@ EXPOSE 8000
 
 # Run the FastAPI server
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+```
+
 frontend/Dockerfile: The frontend Dockerfile builds the React application and serves it.
 
 # Dockerfile
@@ -141,44 +143,47 @@ RUN npm install
 COPY . /app
 
 # Expose port 3000
-```bash
+
 EXPOSE 3000
-```
+
 
 # Start the frontend application
-```bash 
+
 CMD ["npm", "start"]
-Development Setup (Without Docker)
+
 ```
+
+### Development Setup (Without Docker)
 If you prefer running the project without Docker, follow these steps:
 
 
 # Backend:
 
-Navigate to the backend folder:
+- Navigate to the backend folder:
 ```bash
 cd backend
-Install dependencies:
-bash
-Copy code
-pip install -r requirements.txt
-Run the FastAPI server:
-bash
-Copy code
-uvicorn main:app --reload
+```
+- Install dependencies:
+```bash
+ pip install -r requirements.txt
+```
+- Run the FastAPI server:
+```bash
+    uvicorn main:app --reload
 ```
 
 # Frontend:
 
-Navigate to the frontend folder:
+- Navigate to the frontend folder:
 ```bash
-Copy code
 cd frontend
-Install dependencies:
+```
+- Install dependencies:
+```bash 
 npm install
-Start the React development server:
-bash
-Copy code
+```
+- Start the React development server:
+```bash
 npm start
 ```
 # Next Steps
