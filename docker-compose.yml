@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend   # Path to the React Dockerfile
+    ports:
+      - "3000:3000"          # Map container's port 3000 to host's port 3000
+    networks:
+      - app-network          # Use the custom network
+    depends_on:
+      - backend              # Make sure backend starts first
+
+  # Backend service
+  backend:
+    build:
+      context: ./backend     # Path to the FastAPI Dockerfile
+    ports:
+      - "8000:8000"          # Map container's port 8000 to host's port 8000
+    networks:
+      - app-network          # Use the custom network
+
+# Define the network for communication between frontend and backend
+networks:
+  app-network:
+    driver: bridge
