@@ -8,7 +8,7 @@ This is a real-time events management application where users can create events,
  - WebSocket-based real-time updates.
 FastAPI for the backend and React for the frontend.
 - Running the Project with Docker Compose
-To simplify the process of running both the backend (FastAPI) and the frontend (React), the project is set up to use Docker Compose. This allows you to spin up both services simultaneously with a single command.
+To simplify the process of running  the backend (FastAPI)  the project is set up to use Docker Compose. This allows you to spin up services simultaneously with a single command.
 
 ### Prerequisites
 Make sure you have the following installed:
@@ -38,26 +38,16 @@ This command will:
 Start both services in separate containers.
 Access the Application:
 
-### Frontend (React): Open your browser and navigate to:
+### Open your browser and navigate to:
 
 ```bash
-http://localhost:3000
 Backend (FastAPI): Access the backend API at:
 http://localhost:8000
 ```
 - API Documentation: FastAPI automatically generates documentation for its API. You can view the API documentation by visiting:
 
 ```bash 
-Copy code
 http://localhost:8000/docs
-```
-- Stopping the Application
-To stop both the frontend and backend services, press CTRL + C in the terminal where Docker Compose is running, or use the following command in a new terminal window:
-
-```bash
-
-docker-compose down
-This will stop and remove the containers but will leave the built images intact.
 ```
 
 ### Project Structure
@@ -69,9 +59,6 @@ Here’s an overview of the key directories and files in the project:
 │   ├── Dockerfile            # Dockerfile for backend
 │   ├── main.py               # Main FastAPI application
 │   ├── requirements.txt      # Backend dependencies
-├── frontend/                 # React frontend
-│   ├── Dockerfile            # Dockerfile for frontend
-│   ├── src/                  # React application source files
 ├── docker-compose.yml        # Docker Compose configuration
 ```
 ### Key Files:
@@ -85,15 +72,6 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
-    networks:
-      - app-network
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
     networks:
       - app-network
 
@@ -125,34 +103,6 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 ```
 
-frontend/Dockerfile: The frontend Dockerfile builds the React application and serves it.
-
-# Dockerfile
-```bash
-# Use an official Node.js image as a parent image
-FROM node:14
-
-# Set the working directory
-WORKDIR /app
-
-# Copy package.json and install dependencies
-COPY package.json /app
-RUN npm install
-
-# Copy the current directory contents into the container
-COPY . /app
-
-# Expose port 3000
-
-EXPOSE 3000
-
-
-# Start the frontend application
-
-CMD ["npm", "start"]
-
-```
-
 ### Development Setup (Without Docker)
 If you prefer running the project without Docker, follow these steps:
 
@@ -170,21 +120,6 @@ cd backend
 - Run the FastAPI server:
 ```bash
     uvicorn main:app --reload
-```
-
-# Frontend:
-
-- Navigate to the frontend folder:
-```bash
-cd frontend
-```
-- Install dependencies:
-```bash 
-npm install
-```
-- Start the React development server:
-```bash
-npm start
 ```
 # Next Steps
  - Database Integration: Future updates will include migrating from the in-memory database to a persistent database (e.g., SQLite or PostgreSQL).

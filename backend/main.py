@@ -3,7 +3,7 @@
 from fastapi import FastAPI, WebSocket, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from models import EventUpdate, UserAction
 from typing import List
 
 app = FastAPI()
@@ -25,17 +25,6 @@ events_db = [
 
 # List of connected clients for WebSocket communication
 clients = []
-
-# Pydantic model for creating and updating events
-class EventUpdate(BaseModel):
-    title: str
-    organizer: str
-    date_time: str
-    location: str
-
-# Pydantic model for joining/leaving an event
-class UserAction(BaseModel):
-    user: str
 
 @app.get("/api/events")
 async def get_events():
